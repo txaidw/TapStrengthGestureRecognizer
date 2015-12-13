@@ -12,6 +12,7 @@
 		E90915A31C1D1D9B00C15EC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E90915A11C1D1D9B00C15EC7 /* Main.storyboard */; };
 		E90915A51C1D1D9B00C15EC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E90915A41C1D1D9B00C15EC7 /* Assets.xcassets */; };
 		E90915A81C1D1D9B00C15EC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E90915A61C1D1D9B00C15EC7 /* LaunchScreen.storyboard */; };
+		E90915B01C1D222200C15EC7 /* TapStrengthRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90915AF1C1D222200C15EC7 /* TapStrengthRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		E90915A41C1D1D9B00C15EC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E90915A71C1D1D9B00C15EC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E90915A91C1D1D9B00C15EC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E90915AF1C1D222200C15EC7 /* TapStrengthRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapStrengthRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				E909159D1C1D1D9B00C15EC7 /* AppDelegate.swift */,
 				E909159F1C1D1D9B00C15EC7 /* ViewController.swift */,
 				E90915A11C1D1D9B00C15EC7 /* Main.storyboard */,
+				E90915AF1C1D222200C15EC7 /* TapStrengthRecognizer.swift */,
 				E90915A41C1D1D9B00C15EC7 /* Assets.xcassets */,
 				E90915A61C1D1D9B00C15EC7 /* LaunchScreen.storyboard */,
 				E90915A91C1D1D9B00C15EC7 /* Info.plist */,
@@ -137,6 +140,7 @@
 			files = (
 				E90915A01C1D1D9B00C15EC7 /* ViewController.swift in Sources */,
 				E909159E1C1D1D9B00C15EC7 /* AppDelegate.swift in Sources */,
+				E90915B01C1D222200C15EC7 /* TapStrengthRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
