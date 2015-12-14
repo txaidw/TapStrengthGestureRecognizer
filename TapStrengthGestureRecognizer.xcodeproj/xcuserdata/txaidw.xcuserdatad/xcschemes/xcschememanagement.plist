@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>TapStrengthRecognizer.xcscheme</key>
+		<key>TapStrengthGestureRecognizer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>E90915991C1D1D9B00C15EC7</key>
+		<key>E9F9D6BF1C1E622800A13B4C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

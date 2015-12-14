@@ -1,6 +1,6 @@
 //
-//  TapStrengthRecognizer.swift
-//  TapStrengthRecognizer
+//  TapStrengthGestureRecognizer.swift
+//  TapStrengthGestureRecognizer
 //
 //  Created by Txai Wieser on 13/12/15.
 //  Copyright © 2015 Txai Wieser. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 import CoreMotion
 
-protocol TapStrengthRecognizerDelegate:class {
+protocol TapStrengthGestureRecognizerDelegate:class {
     func didReceiveTap(strength:Double)
 }
 
@@ -22,8 +22,8 @@ enum TapStrength:Double {
     case Infinite = 2.0
 }
 
-class TapStrengthRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNotificationReceiver {
-    weak var tapDelegate:TapStrengthRecognizerDelegate?
+class TapStrengthGestureRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNotificationReceiver {
+    weak var tapDelegate:TapStrengthGestureRecognizerDelegate?
     
     var strengthRange:(min:TapStrength, max:TapStrength) = (.None, .Infinite)
     var currentStrength:Double = TapStrength.None.rawValue
@@ -31,7 +31,7 @@ class TapStrengthRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNotificat
     
     var setNextPressureValue = 0
     
-    init(delegate:TapStrengthRecognizerDelegate) {
+    init(delegate:TapStrengthGestureRecognizerDelegate) {
         tapDelegate = delegate
         super.init(target: nil, action: nil)
         addTarget(self, action: Selector("didTapView:"))
@@ -40,7 +40,7 @@ class TapStrengthRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNotificat
     func motionManagerNotification() {
         accelerateNotification(GlobalCMMotionManager.$.accelerometerData?.acceleration ?? CMAcceleration(x: 0, y: 0, z: 0))
     }
-    func didTapView(recognizer:TapStrengthRecognizer) {
+    func didTapView(recognizer:TapStrengthGestureRecognizer) {
         tapDelegate?.didReceiveTap(recognizer.currentStrength)
     }
     
@@ -52,8 +52,6 @@ class TapStrengthRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNotificat
         
     }
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        //setNextPressureValue = KNumberOfPressureSamples;
-        print("in touc ended laa")
         state = .Possible
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {

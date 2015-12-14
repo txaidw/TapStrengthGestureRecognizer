@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E90915991C1D1D9B00C15EC7"
-               BuildableName = "TapStrengthRecognizer.app"
-               BlueprintName = "TapStrengthRecognizer"
-               ReferencedContainer = "container:TapStrengthRecognizer.xcodeproj">
+               BlueprintIdentifier = "E9F9D6BF1C1E622800A13B4C"
+               BuildableName = "TapStrengthGestureRecognizer.app"
+               BlueprintName = "TapStrengthGestureRecognizer"
+               ReferencedContainer = "container:TapStrengthGestureRecognizer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E90915991C1D1D9B00C15EC7"
-            BuildableName = "TapStrengthRecognizer.app"
-            BlueprintName = "TapStrengthRecognizer"
-            ReferencedContainer = "container:TapStrengthRecognizer.xcodeproj">
+            BlueprintIdentifier = "E9F9D6BF1C1E622800A13B4C"
+            BuildableName = "TapStrengthGestureRecognizer.app"
+            BlueprintName = "TapStrengthGestureRecognizer"
+            ReferencedContainer = "container:TapStrengthGestureRecognizer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E90915991C1D1D9B00C15EC7"
-            BuildableName = "TapStrengthRecognizer.app"
-            BlueprintName = "TapStrengthRecognizer"
-            ReferencedContainer = "container:TapStrengthRecognizer.xcodeproj">
+            BlueprintIdentifier = "E9F9D6BF1C1E622800A13B4C"
+            BuildableName = "TapStrengthGestureRecognizer.app"
+            BlueprintName = "TapStrengthGestureRecognizer"
+            ReferencedContainer = "container:TapStrengthGestureRecognizer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E90915991C1D1D9B00C15EC7"
-            BuildableName = "TapStrengthRecognizer.app"
-            BlueprintName = "TapStrengthRecognizer"
-            ReferencedContainer = "container:TapStrengthRecognizer.xcodeproj">
+            BlueprintIdentifier = "E9F9D6BF1C1E622800A13B4C"
+            BuildableName = "TapStrengthGestureRecognizer.app"
+            BlueprintName = "TapStrengthGestureRecognizer"
+            ReferencedContainer = "container:TapStrengthGestureRecognizer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

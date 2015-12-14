@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  TapStrengthRecognizer
+//  TapStrengthGestureRecognizer
 //
-//  Created by Txai Wieser on 13/12/15.
+//  Created by Txai Wieser on 14/12/15.
 //  Copyright © 2015 Txai Wieser. All rights reserved.
 //
 
