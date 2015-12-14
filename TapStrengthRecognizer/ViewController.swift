@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        body.addGestureRecognizer(TapStrengthRecognizer(delegate: self))
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,3 +26,8 @@ class ViewController: UIViewController {
     
 }
 
+extension ViewController: TapStrengthRecognizerDelegate {
+    func didReceiveTap(strength: Double) {
+        print(strength)
+    }
+}
