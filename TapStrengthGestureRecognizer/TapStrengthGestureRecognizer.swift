@@ -14,7 +14,7 @@ protocol TapStrengthGestureRecognizerDelegate:class {
     func didReceiveTap(strength:Double)
 }
 
-enum TapStrength:Double {
+enum TapStrength:Float {
     case None = 0.0
     case Light = 0.3
     case Medium = 0.4
@@ -26,10 +26,7 @@ class TapStrengthGestureRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNo
     weak var tapDelegate:TapStrengthGestureRecognizerDelegate?
     
     var strengthRange:(min:TapStrength, max:TapStrength) = (.None, .Infinite)
-    var currentStrength:Double = TapStrength.None.rawValue
     
-    
-    var setNextPressureValue = 0
     
     init(delegate:TapStrengthGestureRecognizerDelegate) {
         tapDelegate = delegate
@@ -37,15 +34,21 @@ class TapStrengthGestureRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNo
         addTarget(self, action: Selector("didTapView:"))
         GlobalCMMotionManager.registerForNotification(self)
     }
+    deinit {
+        GlobalCMMotionManager.unregisterForNotification(self)
+    }
     func motionManagerNotification() {
         accelerateNotification(GlobalCMMotionManager.$.accelerometerData?.acceleration ?? CMAcceleration(x: 0, y: 0, z: 0))
     }
     func didTapView(recognizer:TapStrengthGestureRecognizer) {
-        tapDelegate?.didReceiveTap(recognizer.currentStrength)
+//        tapDelegate?.didReceiveTap(recognizer.currentStrength)
+        listOfTouches.forEach { print("t: \($0.force)") }
     }
-    
+
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        setNextPressureValue = 3
+        print("====================")
+        self.listOfTouches.appendContentsOf(touches.map { return UIStrengthTouch(touch: $0) })
         state = .Possible
     }
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -53,49 +56,69 @@ class TapStrengthGestureRecognizer: UIGestureRecognizer, GlobalCMMotionManagerNo
     }
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         state = .Possible
+        if let t = touches { self.listOfTouches.removeObjectsInArray(t.map { return UIStrengthTouch(touch: $0) }) }
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         state = .Failed
+        self.listOfTouches.removeObjectsInArray(touches.map { return UIStrengthTouch(touch: $0) })
     }
     override func reset() {
-        currentStrength = TapStrength.None.rawValue
-        setNextPressureValue = 0
+        listOfTouches.removeAll()
         pressureValues.removeAll()
     }
     
-    var pressureValues:[Double] = []
+    var pressureValues:[Float] = []
     
+    var listOfTouches:[UIStrengthTouch] = []
+
     func accelerateNotification(acceleration:CMAcceleration) {
-        // set current pressure value
         if pressureValues.count >= 50 { pressureValues.removeFirst() }
-        pressureValues.append(acceleration.z)
-        
-        if (self.setNextPressureValue > 0) {
-            
-            // calculate average pressure
-            let average = pressureValues.reduce(0) { $0 + $1 } / Double(pressureValues.count)
-            
-            // start with most recent past pressure sample
-            if (setNextPressureValue == 3) {
-                let mostRecent = pressureValues[pressureValues.count-2];
-                currentStrength = fabs(average - mostRecent);
-            }
-            
-            // caluculate pressure as difference between average and current acceleration
-            let diff = fabs(average - acceleration.z);
-            if (currentStrength < diff) { currentStrength = diff; }
-            setNextPressureValue--;
-            
-            if (setNextPressureValue == 0) {
-                if (currentStrength >= strengthRange.min.rawValue && currentStrength <= strengthRange.max.rawValue) {
-                    state = .Recognized
-                } else {
-                    state = .Failed
+        pressureValues.append(Float(acceleration.z))
+        let average = pressureValues.reduce(0) { $0 + $1 } / Float(pressureValues.count)
+
+        for touch in listOfTouches {
+            if touch.attempts > 0 {
+                
+                // calculate average pressure
+                
+                // start with most recent past pressure sample
+                if touch.attempts == 3 {
+                    let mostRecent = pressureValues[pressureValues.count-2];
+                    touch.force = fabs(average - mostRecent);
+                }
+                
+                // caluculate pressure as difference between average and current acceleration
+                let diff = fabs(average - Float(acceleration.z));
+                if (touch.force < diff) { touch.force = diff; }
+                touch.attempts--;
+                
+                if (touch.attempts == 0) {
+                    if (touch.force >= strengthRange.min.rawValue && touch.force <= strengthRange.max.rawValue) {
+                        state = .Recognized
+                    } else {
+                        state = .Failed
+                    }
                 }
             }
         }
     }
 }
+
+class UIStrengthTouch: Equatable {
+    let touch:UITouch
+    var force:Float
+    var attempts:Int
+    
+    init(touch: UITouch, force: Float = 0, attempts: Int = 3) {
+        self.touch = touch
+        self.force = force
+        self.attempts = attempts
+    }
+}
+func ==(lhs: UIStrengthTouch, rhs: UIStrengthTouch) -> Bool {
+    return lhs.touch == rhs.touch
+}
+
 
 protocol GlobalCMMotionManagerNotificationReceiver:class {
     func motionManagerNotification()
@@ -120,5 +143,20 @@ class GlobalCMMotionManager {
     }
     static func unregisterForNotification(object:GlobalCMMotionManagerNotificationReceiver) {
         NSNotificationCenter.defaultCenter().removeObserver(object)
+    }
+}
+
+// Swift 2 Array Extension
+extension Array where Element: Equatable {
+    mutating func removeObject(object: Element) {
+        if let index = self.indexOf(object) {
+            self.removeAtIndex(index)
+        }
+    }
+    
+    mutating func removeObjectsInArray(array: [Element]) {
+        for object in array {
+            self.removeObject(object)
+        }
     }
 }
