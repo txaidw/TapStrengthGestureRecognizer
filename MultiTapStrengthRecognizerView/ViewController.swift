@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        body.addGestureRecognizer(TapStrengthGestureRecognizer(delegate: self))
+//        body.addGestureRecognizer(TapStrengthGestureRecognizer(delegate: self))
         header.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0)
 
     }
